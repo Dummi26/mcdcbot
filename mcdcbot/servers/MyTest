@@ -1,0 +1,4 @@
+type=vanilla-mojang
+dir=/markone/temp/mc/MyTest
+exec=server.jar
+ram=2048

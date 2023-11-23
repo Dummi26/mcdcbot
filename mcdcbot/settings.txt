@@ -1,0 +1,6 @@
+channel_id_info=1177200748648464464
+channel_id_chat=1177200760480612392
+send_join_and_leave_messages=true
+send_start_stop_messages_in_chat=true
+get_my_ip_url1=https://ipinfo.io/ip
+get_my_ip_url2=https://ipecho.net/plain
