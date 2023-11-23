@@ -127,6 +127,27 @@ async fn stop(ctx: Context<'_>) -> Result<(), Error> {
     }
     Ok(())
 }
+#[poise::command(slash_command)]
+async fn run_command(
+    ctx: Context<'_>,
+    #[description = "command (without '/')"] cmd: String,
+) -> Result<(), Error> {
+    let current_lock = ctx.data().current.lock().await;
+    if let Some((_, thread)) = current_lock.as_ref() {
+        ctx.say(format!("Running '{cmd}'")).await?;
+        _ = thread
+            .lock()
+            .await
+            .as_ref()
+            .unwrap()
+            .clone_task_sender()
+            .send_task(MinecraftServerTask::RunCommand(cmd));
+    } else {
+        ctx.say(format!("Use /start to start a server first"))
+            .await?;
+    }
+    Ok(())
+}
 
 async fn event_handler(
     ctx: &serenity::Context,
