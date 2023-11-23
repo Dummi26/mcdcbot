@@ -6,7 +6,7 @@
 
 ## usage
 
-See the repository for examples, notable `mcdcbot/servers/*` and `mcdcbot/settings.txt`.
+See the repository for examples, notably `mcdcbot/servers/*` and `mcdcbot/settings.txt`.
 
 For advanced config options, check `minecraft_manager/src/lib.rs`, especially the `fn from_lines()`.
 
