@@ -238,7 +238,7 @@ async fn main() {
     // start
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
-            commands: vec![list(), start(), stop()],
+            commands: vec![list(), start(), stop(), run_command()],
             event_handler: |ctx, event, framework, data| {
                 Box::pin(event_handler(ctx, event, framework, data))
             },
