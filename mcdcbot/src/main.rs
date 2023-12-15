@@ -46,6 +46,7 @@ async fn start(
         if ctx.channel_id() != cid {
             ctx.say(format!("This command can only be used in <#{cid}>.",))
                 .await?;
+            return Ok(());
         }
     }
     // find server by name
@@ -123,6 +124,7 @@ async fn stop(ctx: Context<'_>) -> Result<(), Error> {
         if ctx.channel_id() != cid {
             ctx.say(format!("This command can only be used in <#{cid}>.",))
                 .await?;
+            return Ok(());
         }
     }
     let current_lock = ctx.data().current.lock().await;
@@ -151,6 +153,7 @@ async fn run_command(
         if ctx.channel_id() != cid {
             ctx.say(format!("This command can only be used in <#{cid}>.",))
                 .await?;
+            return Ok(());
         }
     }
     let current_lock = ctx.data().current.lock().await;
