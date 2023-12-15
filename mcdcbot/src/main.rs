@@ -41,6 +41,13 @@ async fn start(
     ctx: Context<'_>,
     #[description = "Server's name (see /list)"] srv: String,
 ) -> Result<(), Error> {
+    {
+        let cid = ctx.data().settings.lock().await.channel_id_info;
+        if ctx.channel_id() != cid {
+            ctx.say(format!("This command can only be used in <#{cid}>.",))
+                .await?;
+        }
+    }
     // find server by name
     let servers_lock = ctx.data().servers.lock().await;
     let mut matching_server = None;
@@ -111,6 +118,13 @@ async fn start(
 }
 #[poise::command(slash_command)]
 async fn stop(ctx: Context<'_>) -> Result<(), Error> {
+    {
+        let cid = ctx.data().settings.lock().await.channel_id_info;
+        if ctx.channel_id() != cid {
+            ctx.say(format!("This command can only be used in <#{cid}>.",))
+                .await?;
+        }
+    }
     let current_lock = ctx.data().current.lock().await;
     if let Some((_, thread)) = current_lock.as_ref() {
         _ = thread
@@ -132,6 +146,13 @@ async fn run_command(
     ctx: Context<'_>,
     #[description = "command (without '/')"] cmd: String,
 ) -> Result<(), Error> {
+    {
+        let cid = ctx.data().settings.lock().await.channel_id_info;
+        if ctx.channel_id() != cid {
+            ctx.say(format!("This command can only be used in <#{cid}>.",))
+                .await?;
+        }
+    }
     let current_lock = ctx.data().current.lock().await;
     if let Some((_, thread)) = current_lock.as_ref() {
         ctx.say(format!("Running '{cmd}'")).await?;
